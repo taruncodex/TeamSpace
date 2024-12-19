@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {useNavigate} from "react-router-dom"
+import "./Login_Register.css"
 
 const RegisterPage = () => {
   const [Fullname, setFull_Name] = useState("");

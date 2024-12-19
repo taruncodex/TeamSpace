@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-
+import "./Login_Register.css"
 import axios from "axios";
 
 
@@ -37,33 +37,20 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="login-signin">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        {error && <p className="error">{error}</p>}
-        <div>
-          <label>Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-      <p>
-        Don't have an account? <Link to={"/register"}>Register</Link>
-      </p>
+    <div className="form" onSubmit={handleLogin}>
+      <h2>Login Form Form</h2>
+     
+
+      <input type="email" placeholder='Email' value={email}
+        onChange={(e) => setEmail(e.target.value)} required/>
+      
+      <input type="password" placeholder='Password' value={password}
+        onChange={(e) => setPassword(e.target.value)} required/>
+      
+
+      <a href="#">Forgot Password ?</a>
+      <button>Login</button>
+
     </div>
   );
 }
