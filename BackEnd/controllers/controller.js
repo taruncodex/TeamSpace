@@ -124,3 +124,16 @@ export const logIn = async (req, res) => {
     });
   }
 };
+
+export const homePage = async (req, res) => {
+  try {
+    return res.status(401).json({
+      message: "This is homePage",
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: "Error Occures.",
+      error: error.message,
+    });
+  }
+};
