@@ -77,6 +77,7 @@ export const logIn = async (req, res) => {
     const isValidPass = await comparePassword(password, user[0].password);
 
     if (isValidPass) {
+      // Creating the Access Token.
       const token = jwt.sign(
         // Payload
         {
@@ -112,6 +113,7 @@ export const logIn = async (req, res) => {
       });
     }
 
+    // If the password does not match
     return res.status(401).json({
       message: "User Details are wrong. . .",
     });
