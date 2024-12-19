@@ -1,5 +1,6 @@
 {
   "name": "teamspace2",
+  "proxy":"http://localhost:3000",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,7 +14,8 @@
     "axios": "^1.7.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^7.0.2"
+    "react-router-dom": "^7.0.2",
+    "react-toastify": "^11.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",

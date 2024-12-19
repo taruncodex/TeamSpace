@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {toast} from "react-toastify"
 import axios from "axios";
 
 export default function RegisterPage() {
+  const [Fullname, setFull_Name] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+ 
+
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -19,10 +24,17 @@ export default function RegisterPage() {
     }
 
     try {
-      await axios.post("/our/api/is/in/process", { email, password });
+      
+      const  res = await axios.post(`/sign-up`, {name, email, password, Full_Name});
+      if (res.data.success){
+        toast.success(res.data.message)
+      }else{
+        toast.error(res.data.message)
+      }
       navigate("/login");
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
+      toast.error("Something went Wrong")
     }
   }
 
@@ -32,11 +44,30 @@ export default function RegisterPage() {
       <form onSubmit={handleRegister}>
         {error && <p className="error">{error}</p>}
         <div>
+          <label>Full Name</label>
+          <input
+            type="text"
+            value={Fullname}
+            onChange={(e) => setFull_Name(e.target.value)}
+            required
+          />
+        </div>
+       
+        <div>
           <label>Email</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Phone No.</label>
+          <input
+            type="number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
             required
           />
         </div>
@@ -53,11 +84,12 @@ export default function RegisterPage() {
           <label>Confirm Password</label>
           <input
             type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
+       
         <button type="submit">Register</button>
       </form>
       <p>

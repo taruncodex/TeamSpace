@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "../styles/login.css";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -13,10 +14,17 @@ export default function LoginPage() {
     setError("");
 
     try {
-      const response = await axios.post("/our/api/is/in/process", {
+      const res = await axios.post("/login", {
         email,
         password,
       });
+
+      if (res.data.sucess){
+        toast.success(res.data.message)
+        Navigate('/')
+      }else{
+        toast.error(res.data.message)
+      }
       localStorage.setItem("token", response.data.token);
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
