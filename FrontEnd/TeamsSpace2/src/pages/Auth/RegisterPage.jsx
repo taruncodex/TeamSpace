@@ -25,24 +25,39 @@ const RegisterPage = () => {
 
     try {
       const res = await axios.post(
-        `http://localhost:3000/sign-up`,
-        { email, password, userName, phone },
+        `https://teamspace.onrender.com/sign-up`,
+        { email, password, userName: Fullname, phone },
         {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log(res);
 
-      if (res.data.success) {
-        console.log(res.data.message);
+      // Log the entire response to inspect it
+      console.log("Response:", res);
+
+      // Since the backend returns a string, check if it contains a success message
+      if (res.data && res.data.includes("Successfully")) {
+        alert("Your Account Created Successfully.");
+        console.log(res.data); // Success message
+        navigate("/Authpage", { state: { isLogin: true } });
       } else {
-        console.log(res.data.message);
+        console.log(res.data || "Something went wrong.");
       }
-      navigate("/workspace");
     } catch (err) {
-      console.log(err.response);
-      setError(err.response?.data?.message || "Registration failed");
-      console.log(err.response?.data || "Something went Wrong"); //    Instead of this  console.log("Something went Wrong");
+      // Handle errors (server or network errors)
+      if (err.response) {
+        // Server responded with an error
+        setError(err.response?.data?.message || "Registration failed");
+        console.log("Error response:", err.response);
+      } else if (err.request) {
+        // No response was received
+        setError("No response from server. Please try again.");
+        console.log("Request error:", err.request);
+      } else {
+        // Other errors (e.g., invalid setup)
+        setError("Something went wrong.");
+        console.log("General error:", err.message);
+      }
     }
   }
 
@@ -86,8 +101,6 @@ const RegisterPage = () => {
         onChange={(e) => setConfirmPassword(e.target.value)}
         required
       />
-
-      <a href="#">Forgot Password ?</a>
       <button type="submit">Signup</button>
     </form>
   );
