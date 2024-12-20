@@ -15,6 +15,7 @@ const RegisterPage = () => {
 
   async function handleRegister(e) {
     e.preventDefault();
+
     setError("");
 
     if (password !== confirmPassword) {
@@ -22,22 +23,62 @@ const RegisterPage = () => {
       return;
     }
 
+    //   try {
+    //     const res = await axios.post(
+    //       `https://teamspace.onrender.com/sign-up`,
+    //       { email, password, userName: Fullname, phone },
+    //       {
+    //         headers: { "Content-Type": "application/json" },
+    //       }
+    //     );
+    //     console.log("Response:", res);
+    //     if (res.data.success) {
+    //       console.log(res.data.message);
+    //       navigate("/AuthForm", { state: { isLogin: true } });
+    //     } else {
+    //       console.log(res.data.message);
+    //     }
+    //   } catch (err) {
+    //     setError(err.response?.data?.message || "Registration failed");
+    //     console.log(err.response?.data || "Something went Wrong");
+    //   }
+    // }
+
     try {
-      const res = await axios.post(`http://localhost:5000/sign-up`, {
-        email,
-        password,
-        Fullname,
-        phone,
-      });
-      if (res.data.success) {
-        console.log(res.data.message);
+      const res = await axios.post(
+        `https://teamspace.onrender.com/sign-up`,
+        { email, password, userName: Fullname, phone },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      // Log the entire response to inspect it
+      console.log("Response:", res);
+
+      // Since the backend returns a string, check if it contains a success message
+      if (res.data && res.data.includes("Successfully")) {
+        alert("Your Account Created Successfully.")
+        console.log(res.data); // Success message
+        navigate("/Authpage", { state: { isLogin: true } });
       } else {
-        console.log(res.data.message);
+        console.log(res.data || "Something went wrong.");
       }
-      navigate("/AuthForm");
     } catch (err) {
-      setError(err.response?.data?.message || "Registration failed");
-      console.log("Something went Wrong");
+      // Handle errors (server or network errors)
+      if (err.response) {
+        // Server responded with an error
+        setError(err.response?.data?.message || "Registration failed");
+        console.log("Error response:", err.response);
+      } else if (err.request) {
+        // No response was received
+        setError("No response from server. Please try again.");
+        console.log("Request error:", err.request);
+      } else {
+        // Other errors (e.g., invalid setup)
+        setError("Something went wrong.");
+        console.log("General error:", err.message);
+      }
     }
   }
 
@@ -81,8 +122,6 @@ const RegisterPage = () => {
         onChange={(e) => setConfirmPassword(e.target.value)}
         required
       />
-
-      <a href="#">Forgot Password ?</a>
       <button type="submit">Signup</button>
     </form>
   );

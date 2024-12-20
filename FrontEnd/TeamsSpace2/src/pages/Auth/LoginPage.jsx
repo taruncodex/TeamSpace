@@ -1,56 +1,67 @@
 import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
-import "./Login_Register.css"
+import { Navigate } from "react-router-dom";
+import "./Login_Register.css";
 import axios from "axios";
-
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [redirect, setRedirect] = useState(false);  // Add a state to handle redirection
+  const [redirect, setRedirect] = useState(false);
 
   async function handleLogin(e) {
     e.preventDefault();
     setError("");
 
     try {
-      const res = await axios.post("/login", {
+      const res = await axios.post("https://teamspace.onrender.com/login", {
         email,
         password,
       });
-
-      if (res.data.success) {
-        
-        localStorage.setItem("token", res.data.token);  // Use 'res' instead of 'response'
-        setRedirect(true);  // Set redirect to true after successful login
+      console.log("Response:", res);
+      if (res.data.msg) {
+        // Assuming that the token is sent in the response and `msg` indicates success
+        localStorage.setItem("token", res.data.token); // Store token in localStorage (if available)
+        setRedirect(true); // Set redirect flag to true after successful login
       } else {
-        toast.error(res.data.message);
+        setError(res.data.msg || "Login failed");
       }
     } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
+      console.error("Login error:", err);
+      if (err.response) {
+        // The request was made and the server responded
+        setError(err.response.data?.msg || "Login failed");
+      } else if (err.request) {
+        setError("No response from the server. Please try again.");
+      } else {
+        setError("An error occurred while processing your request.");
+      }
     }
   }
-
   if (redirect) {
-    return <Navigate to="/" />;  // Redirect the user to the home page after login
+    return <Navigate to="/Userspage" />;
   }
 
   return (
-    <div className="form" onSubmit={handleLogin}>
-      <h2>Login Form Form</h2>
-     
-
-      <input type="email" placeholder='Email' value={email}
-        onChange={(e) => setEmail(e.target.value)} required/>
-      
-      <input type="password" placeholder='Password' value={password}
-        onChange={(e) => setPassword(e.target.value)} required/>
-      
-
-      <a href="#">Forgot Password ?</a>
+    <form className="form" onSubmit={handleLogin}>
+      <h2>Login Form</h2>
+      {error && <div className="error">{error}</div>}{" "}
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      <a href="#">Forgot Password?</a>
       <button>Login</button>
-
-    </div>
+    </form>
   );
 }
