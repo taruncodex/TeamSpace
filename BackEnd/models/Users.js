@@ -5,6 +5,7 @@ const userSchema = new Schema({
   email: { type: String },
   password: { type: String, required: true },
   phone: { type: String, required: true },
+
   refreshToken: { type: String },
 });
 
