@@ -23,27 +23,6 @@ const RegisterPage = () => {
       return;
     }
 
-    //   try {
-    //     const res = await axios.post(
-    //       `https://teamspace.onrender.com/sign-up`,
-    //       { email, password, userName: Fullname, phone },
-    //       {
-    //         headers: { "Content-Type": "application/json" },
-    //       }
-    //     );
-    //     console.log("Response:", res);
-    //     if (res.data.success) {
-    //       console.log(res.data.message);
-    //       navigate("/AuthForm", { state: { isLogin: true } });
-    //     } else {
-    //       console.log(res.data.message);
-    //     }
-    //   } catch (err) {
-    //     setError(err.response?.data?.message || "Registration failed");
-    //     console.log(err.response?.data || "Something went Wrong");
-    //   }
-    // }
-
     try {
       const res = await axios.post(
         `https://teamspace.onrender.com/sign-up`,
@@ -58,7 +37,7 @@ const RegisterPage = () => {
 
       // Since the backend returns a string, check if it contains a success message
       if (res.data && res.data.includes("Successfully")) {
-        alert("Your Account Created Successfully.")
+        alert("Your Account Created Successfully.");
         console.log(res.data); // Success message
         navigate("/Authpage", { state: { isLogin: true } });
       } else {
