@@ -27,7 +27,9 @@ export default function LoginPage() {
         setError(res.data.msg || "Login failed");
       }
     } catch (err) {
-      console.error("Login error:", err);
+      console.error("Login error:", err); // To show the general error
+      console.error("Login error:", err.response.data); // to catch the API error
+
       if (err.response) {
         // The request was made and the server responded
         setError(err.response.data?.msg || "Login failed");
