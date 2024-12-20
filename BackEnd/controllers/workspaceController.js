@@ -1,8 +1,7 @@
 import { Workspace } from "../models/workspaceModel.js";
 
 export const createWorkspace = async (req, res) => {
-  const { workSpaceName, members, createdBy } = req.body;
-
+  const { workSpaceName, members, createdBy } = req.body; // member should be the array of object [{},{}] // that include the object is of each user
   if (!workSpaceName || !createdBy) {
     return res
       .status(400)
@@ -13,19 +12,19 @@ export const createWorkspace = async (req, res) => {
     // Creating new workspace
     const newWorkspace = new Workspace({
       workSpaceName,
-      members: members || [], // If no members are provided, default to an empty array
+      members: members || [{ userId: createdBy }], // If no members are provided, default to an empty array
       createdBy,
     });
 
     const savedWorkspace = await newWorkspace.save();
 
-    res.status(201).json({
+    return res.status(201).json({
       message: "Workspace created successfully",
       workspace: savedWorkspace,
     });
   } catch (error) {
     console.error("Error creating workspace:", error);
-    res
+    return res
       .status(500)
       .json({ msg: "Failed to create workspace.", error: error.message });
   }
@@ -33,27 +32,30 @@ export const createWorkspace = async (req, res) => {
 
 // Controller to get workspaces by user
 export const getWorkspacesByUser = async (req, res) => {
-  const { userName } = req.params;
+  const { userId, userName } = req.params;
 
+  console.log(userId, userName);
   try {
-    if (!userName) {
+    if (!userId) {
       return res.status(400).json({ error: "User name is required." });
     }
+
+    console.log();
 
     // Find all workspaces where the user is either the creator or a member
     const workspaces = await Workspace.find({
       $or: [
-        { createdBy: userName }, // User is the creator
-        { "members.userName": userName }, // User is a member
+        { createdBy: userId }, // User is the creator
+        { "members.userId": userId }, // User is a member
       ],
     })
-      .populate("members.userName", "userName email") // Populate user details if needed
-      .populate("createdBy", "userName email"); // Populate creator details if needed
+      .populate("members.userId", "userId email") // Populate user details correctly
+      .populate("createdBy", "userId email"); // Populate creator details
 
-    res.status(200).json(workspaces);
+    return res.status(200).json(workspaces);
   } catch (error) {
     console.error("Error fetching workspaces:", error);
-    res
+    return res
       .status(500)
       .json({ msg: "Failed to fetch workspaces.", error: error.message });
   }
