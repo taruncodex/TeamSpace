@@ -15,6 +15,7 @@ const RegisterPage = () => {
 
   async function handleRegister(e) {
     e.preventDefault();
+
     setError("");
 
     if (password !== confirmPassword) {
@@ -23,21 +24,25 @@ const RegisterPage = () => {
     }
 
     try {
-      const res = await axios.post(`http://localhost:5000/sign-up`, {
-        email,
-        password,
-        Fullname,
-        phone,
-      });
+      const res = await axios.post(
+        `http://localhost:3000/sign-up`,
+        { email, password, userName, phone },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      console.log(res);
+
       if (res.data.success) {
         console.log(res.data.message);
       } else {
         console.log(res.data.message);
       }
-      navigate("/AuthForm");
+      navigate("/workspace");
     } catch (err) {
+      console.log(err.response);
       setError(err.response?.data?.message || "Registration failed");
-      console.log("Something went Wrong");
+      console.log(err.response?.data || "Something went Wrong"); //    Instead of this  console.log("Something went Wrong");
     }
   }
 
