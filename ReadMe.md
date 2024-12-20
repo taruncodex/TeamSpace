@@ -2,14 +2,7 @@
 
 # BackEnd
 
-dependencies:
+Run these two commands first before runing the server :
 
-    bcrypt :
-    dotenv :
-    express :
-    jsonwebtoken :
-    mongoose :
-
-devDependencies :
-eslint":
-nodemon:
+1.  npm i bcrypt dotenv express jsonwebtoken mongoose
+2.  npm i --save-dev nodemon
