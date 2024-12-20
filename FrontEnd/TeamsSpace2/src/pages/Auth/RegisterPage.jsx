@@ -45,6 +45,7 @@ const RegisterPage = () => {
       }
     } catch (err) {
       // Handle errors (server or network errors)
+      console.log("API Error : ", err.response?.data);
       if (err.response) {
         // Server responded with an error
         setError(err.response?.data?.message || "Registration failed");
