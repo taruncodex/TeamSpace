@@ -22,28 +22,7 @@ const RegisterPage = () => {
       setError("Passwords do not match");
       return;
     }
-
-    //   try {
-    //     const res = await axios.post(
-    //       `https://teamspace.onrender.com/sign-up`,
-    //       { email, password, userName: Fullname, phone },
-    //       {
-    //         headers: { "Content-Type": "application/json" },
-    //       }
-    //     );
-    //     console.log("Response:", res);
-    //     if (res.data.success) {
-    //       console.log(res.data.message);
-    //       navigate("/AuthForm", { state: { isLogin: true } });
-    //     } else {
-    //       console.log(res.data.message);
-    //     }
-    //   } catch (err) {
-    //     setError(err.response?.data?.message || "Registration failed");
-    //     console.log(err.response?.data || "Something went Wrong");
-    //   }
-    // }
-
+    
     try {
       const res = await axios.post(
         `https://teamspace.onrender.com/sign-up`,
