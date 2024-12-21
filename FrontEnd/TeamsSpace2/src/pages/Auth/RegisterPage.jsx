@@ -22,7 +22,7 @@ const RegisterPage = () => {
       setError("Passwords do not match");
       return;
     }
-    
+
     try {
       const res = await axios.post(
         `https://teamspace.onrender.com/sign-up`,
@@ -37,7 +37,7 @@ const RegisterPage = () => {
 
       // Since the backend returns a string, check if it contains a success message
       if (res.data && res.data.includes("Successfully")) {
-        alert("Your Account Created Successfully.")
+        alert("Your Account Created Successfully.");
         console.log(res.data); // Success message
         navigate("/Authpage", { state: { isLogin: true } });
       } else {

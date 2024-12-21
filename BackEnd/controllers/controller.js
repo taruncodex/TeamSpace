@@ -17,43 +17,55 @@ const comparePassword = async (password, hashedPassword) => {
 // "/sign-up" route logic to create User.
 export const createUser = async (req, res) => {
   try {
+    console.log(req.body);
     const { userName, password, email, phone } = req.body;
 
+    console.log("checking the details");
     if (!userName || !password || !email || !phone) {
-      return res
-        .status(401)
-        .json("userName , password, email and phone all details are required.");
+      return res.status(400).json({
+        message: "userName, password, email, and phone are required.",
+      });
     }
 
+    console.log("checking the email");
     //Checking if this Email Already Exists
     const existingEmail = await User.findOne({ email: email });
     if (existingEmail) {
       return res.status(400).json({ error: " This email already exists." });
     }
+    console.log("checking the phone number");
 
     //Checking if this phone no. Already Exists
     const existingPhone = await User.findOne({ phone: phone });
-    if (existingEmail) {
+    if (existingPhone) {
       return res
         .status(400)
         .json({ error: " This phone number already exists." });
     }
 
+    console.log("Hasinh the password");
+
     // Hasing the Password
     const hashedPassword = await hashPassword(password);
+    console.log("Creating the user");
 
     // Finally Creaate a new User.
-    await User.create({ userName, password: hashedPassword, email, phone }); // using User.create to create the User record inside the collection
-
+    await User.create({
+      userName: userName,
+      password: hashedPassword,
+      email: email,
+      phone: phone,
+    }); // using User.create to create the User record inside the collection
+    console.log("user created");
     return res.json("Your Account Created Successfully.");
   } catch (error) {
+    console.log("Error occur ");
     return res.json({
       message: "Error Occures.",
       error: error.message,
     });
   }
 };
-
 // "LogIn" route logic to logIn user.
 export const logIn = async (req, res) => {
   try {
