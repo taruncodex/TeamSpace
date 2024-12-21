@@ -26,7 +26,9 @@ app.listen(process.env.PORT || 3000, async () => {
       "mongodb+srv://shambhu04kumar:123456mongodb@cluster0.auxyo.mongodb.net/workspaces"
     );
     console.log("Database connected successfully");
-    console.log("Listening : http://localhost:3000");
+    console.log(
+      "Listening : http://localhost:3000 and  https://teamspace.onrender.com "
+    );
   } catch (error) {
     console.log("Error :", error);
   }
