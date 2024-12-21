@@ -95,13 +95,14 @@ export const logIn = async (req, res) => {
         {
           id: user[0]._id,
           name: user[0].userName,
+          email: user[0].email,
         },
         //Server Side Password
         process.env.JWT_SECRET,
 
         // Expiration Time
         {
-          expiresIn: "10min",
+          expiresIn: "100min",
         }
       );
 
@@ -122,6 +123,7 @@ export const logIn = async (req, res) => {
       return res.status(201).json({
         msg: "Token is verifined So you can enter into the TeamSpace.",
         Data: user,
+        token: token,
       });
     }
 
