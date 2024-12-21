@@ -1,26 +1,25 @@
-/* .users-page {
-  max-width: 800px;
+body {
+  width: fit-content;
+  height: 100vh;
   margin: 0 auto;
   padding: 20px;
-  background-color: teal;
-} */
-body {
-  width: fit-content; /* Adjust the width of the body according to the content */
-  margin: 0 auto; /* Centers the body content horizontally */
-  padding: 20px; /* Optional: Adds some padding around the content */
-  background-color: teal; /* Optional: Light background color for the body */
-  min-width: 300px; /* Ensures the body doesn't shrink too small */
-  box-sizing: border-box; /* Makes sure padding doesn't affect the width calculation */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #008080;
+  min-width: 300px;
+  box-sizing: border-box;
 }
 
 .users-page {
   width: 1000px;
-  background-color: teal;
+  background-color: #008080;
   border-radius: 8px;
   padding: 20px;
 }
 
 h2 {
+  font-size: 40px;
   text-align: center;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   margin-bottom: 20px;
@@ -98,12 +97,17 @@ h2 {
   box-sizing: border-box;
 }
 
-.plus-sign {
-  font-size: 24px;
+.box.dotted-box .add-workspace-text {
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.box .plus-sign {
+  font-size: 45px;
   margin-right: 10px;
   font-weight: bold;
-  color: #007bff;
-  border: 2px solid;
+  color: rgb(99, 247, 99);
 }
 
 .modal {
