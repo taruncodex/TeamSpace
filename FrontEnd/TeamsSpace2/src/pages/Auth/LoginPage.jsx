@@ -22,6 +22,7 @@ export default function LoginPage() {
       if (res.data.msg) {
         // Assuming that the token is sent in the response and `msg` indicates success
         localStorage.setItem("token", res.data.token); // Store token in localStorage (if available)
+        localStorage.setItem("userId", res.data.id); // Storing user ID
         setRedirect(true); // Set redirect flag to true after successful login
       } else {
         setError(res.data.msg || "Login failed");

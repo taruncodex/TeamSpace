@@ -9,6 +9,8 @@ export default function UsersPage() {
   const [newMembers, setNewMembers] = useState("");
   const [error, setError] = useState("");
 
+  const userId = localStorage.getItem("userId"); // Retrieve the logged-in user ID
+
   useEffect(() => {
     fetchWorkspaces();
   }, []);
@@ -16,10 +18,10 @@ export default function UsersPage() {
   async function fetchWorkspaces() {
     try {
       const response = await axios.get(
-        `https://teamspace.onrender.com/Workspaces/:userName`
+        `https://teamspace.onrender.com/Workspaces/:userId`
       );
       setWorkspaces(response.data);
-    } catch (err) {
+    } catch (error) {
       setError("Failed to fetch workspaces");
     }
   }
@@ -39,15 +41,24 @@ export default function UsersPage() {
         {
           WorkspaceName: newWorkspaceName,
           members: newMembers.split(",").map((member) => member.trim()),
-          createdBy: "", //Replace with authenticated user info
+          createdBy: userId, //Replace with authenticated user info
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       );
+
+      console.log("Server Response:", response.data);
+
       setWorkspaces([...workspaces, response.data]);
       setNewWorkspaceName("");
       setNewMembers("");
       setIsModalOpen(false);
-    } catch (err) {
-      setError(err.response.data?.message || "Failed to create Workspace.");
+    } catch (error) {
+      // setError(error.response.data?.message || "Failed to create Workspace.");
+      console.log(error.response.data);
     }
   }
 
