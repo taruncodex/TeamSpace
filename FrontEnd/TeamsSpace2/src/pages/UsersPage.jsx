@@ -81,13 +81,19 @@ export default function UsersPage() {
         {/* <div className="box">Workspace 1</div>
         <div className="box">Workspace 2</div> */}
         {workspaces.map((workspace) => (
-          <div key={workspace.id} className="box">
-            <h3>{workspace.name}</h3>
+          <div key={workspace._id} className="box">
+            <h3>{workspace.workSpaceName}</h3>
             <p>
-              <strong>Members:</strong> {workspace.members.join(", ")}
+              <strong>Members:</strong>{" "}
+              {workspace.members.length > 0
+                ? workspace.members.map((member, index) => (
+                    <span key={index}>{member.email}</span>
+                  ))
+                : "No members"}
             </p>
             <p>
-              <strong>Created By:</strong> {workspace.createdBy}
+              <strong>Created By:</strong>{" "}
+              {workspace.createdBy?.email || "Unknown"}
             </p>
           </div>
         ))}

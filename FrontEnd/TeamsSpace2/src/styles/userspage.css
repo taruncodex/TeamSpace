@@ -10,13 +10,13 @@ h2 {
   margin-bottom: 20px;
 }
 
-.boxes {
+/* .boxes {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-}
+} */
 
-.box {
+/* .box {
   padding: 20px;
   border: 2px solid #ccc;
   border-radius: 8px;
@@ -27,28 +27,99 @@ h2 {
   justify-content: center;
   width: 200px;
   height: 100px;
+} */
+
+.box {
+  padding: 15px; /* Adjusted for more space */
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  font-size: 15px; /* Reduced font size for better fit */
+  display: flex;
+  flex-direction: column; /* Stack the elements vertically */
+  align-items: flex-start; /* Align text to the left */
+  justify-content: space-between; /* Distribute content evenly */
+  width: 240px; /* Slightly wider for more content space */
+  height: auto; /* Allow box height to adjust */
+  box-sizing: border-box; /* Include padding and border in the width */
 }
 
 .box h3 {
-  margin: 0;
-  font-size: 18px;
+  font-size: 16px; /* Adjusted title size */
+  font-weight: bold;
+  margin: 0 0 10px;
+  color: #333;
 }
 
 .box p {
+  font-size: 13px; /* Smaller font for better fit */
+  color: #555;
+  line-height: 1.4;
   margin: 5px 0;
-  font-size: 14px;
 }
 
-.dotted-box {
+.box span {
+  display: inline-block;
+  background-color: #e0f7fa;
+  color: #00796b;
+  padding: 3px 6px;
+  margin: 2px 0;
+  border-radius: 12px;
+  font-size: 12px;
+  white-space: nowrap; /* Prevent wrapping of individual member emails */
+  overflow: hidden; /* Hide overflowing content */
+  text-overflow: ellipsis; /* Add ellipsis for overflow */
+}
+
+.boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px; /* Adjusted spacing between boxes */
+  justify-content: center; /* Center-align the grid */
+}
+
+@media screen and (max-width: 768px) {
+  .box {
+    width: 100%; /* Make boxes full-width for smaller screens */
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .boxes {
+    gap: 10px; /* Reduced gap for smaller screens */
+  }
+}
+
+/* .dotted-box {
   border: 2px dotted #3f3c3c;
   background-color: #e8f0fe;
   cursor: pointer;
 }
 
 .plus-sign {
-  font-size: 24px;
+  font-size: 100vh;
   margin-right: 10px;
   font-weight: bold;
+} */
+.dotted-box {
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+  justify-content: center;
+  padding: 15px;
+  border: 2px dotted #3f3c3c;
+  background-color: #e8f0fe;
+  cursor: pointer;
+  width: 220px; /* Adjusted width */
+  height: auto; /* Let the height adjust */
+  box-sizing: border-box;
+}
+
+.plus-sign {
+  font-size: 24px; /* Reduced to a balanced size */
+
+  margin-right: 10px; /* Adds spacing between the icon and text */
+  font-weight: bold;
+  color: #007bff; /* Optional: Add color for better visual distinction */
 }
 
 .modal {
