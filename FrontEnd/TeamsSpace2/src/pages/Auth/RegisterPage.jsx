@@ -22,7 +22,6 @@ const RegisterPage = () => {
       setError("Passwords do not match");
       return;
     }
-
     try {
       const res = await axios.post(
         `https://teamspace.onrender.com/sign-up`,
