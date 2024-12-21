@@ -17,9 +17,15 @@ export default function UsersPage() {
 
   async function fetchWorkspaces() {
     try {
+      console.log("Try to make get req.");
+      console.log(userId);
       const response = await axios.get(
-        `https://teamspace.onrender.com/Workspaces/:userId`
+        `https://teamspace.onrender.com/workspaces/${userId}` // not :-  workspaces/:userId
       );
+      console.log("Get req. completed. ");
+      console.log("response: ", response);
+      console.log("response.data :  ", response.data);
+
       setWorkspaces(response.data);
     } catch (error) {
       setError("Failed to fetch workspaces");

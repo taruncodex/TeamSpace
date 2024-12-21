@@ -1,14 +1,17 @@
 import { Workspace } from "../models/workspaceModel.js";
 
 export const createWorkspace = async (req, res) => {
-  const { workSpaceName, members, createdBy } = req.body; // member should be the array of object [{},{}] // that include the object is of each user
-  if (!workSpaceName || !createdBy) {
-    return res
-      .status(400)
-      .json({ error: "Name and createdBy fields are required." });
-  }
+  console.log("Enterd into creted Backend : req arrived. ");
 
   try {
+    const { workSpaceName, members, createdBy } = req.body; // member should be the array of object [{},{}] // that include the object is of each user
+    if (!workSpaceName || !createdBy) {
+      return res
+        .status(400)
+        .json({ error: "Name and createdBy fields are required." });
+    }
+    console.log("req.body checked");
+
     // Creating new workspace
     const newWorkspace = new Workspace({
       workSpaceName,
@@ -16,7 +19,12 @@ export const createWorkspace = async (req, res) => {
       createdBy,
     });
 
+    console.log("WorkSpace should be created till now .");
+    console.log(newWorkspace);
+
     const savedWorkspace = await newWorkspace.save();
+
+    console.log("Sending the response");
 
     return res.status(201).json({
       message: "Workspace created successfully",
@@ -32,15 +40,16 @@ export const createWorkspace = async (req, res) => {
 
 // Controller to get workspaces by user
 export const getWorkspacesByUser = async (req, res) => {
-  const { userId, userName } = req.params;
+  console.log("Entred into the Backend with req.params");
+  const { userId } = req.params;
 
-  console.log(userId, userName);
+  console.log(userId);
   try {
     if (!userId) {
       return res.status(400).json({ error: "User name is required." });
     }
 
-    console.log();
+    console.log("user Id verified ");
 
     // Find all workspaces where the user is either the creator or a member
     const workspaces = await Workspace.find({
@@ -51,6 +60,8 @@ export const getWorkspacesByUser = async (req, res) => {
     })
       .populate("members.userId", "userId email") // Populate user details correctly
       .populate("createdBy", "userId email"); // Populate creator details
+
+    console.log("WorkSpace is this: ", workspaces);
 
     return res.status(200).json(workspaces);
   } catch (error) {
