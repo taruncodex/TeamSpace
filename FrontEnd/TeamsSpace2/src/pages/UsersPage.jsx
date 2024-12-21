@@ -75,7 +75,7 @@ export default function UsersPage() {
       <h2>WorkSpaces</h2>
       <div className="boxes">
         <div className="box dotted-box" onClick={() => setIsModalOpen(true)}>
-          <span className="plus-sign">+</span> 
+          <span className="plus-sign">+</span>
           <p className="add-workspace-text">Add Workspace</p>
         </div>
 
@@ -86,7 +86,7 @@ export default function UsersPage() {
             <h3>{workspace.workSpaceName}</h3>
             <p>
               <strong>Members:</strong>{" "}
-              {workspace.members.length > 0
+              {workspace.members && workspace.members.length > 0
                 ? workspace.members.map((member, index) => (
                     <span key={index}>{member.email}</span>
                   ))
