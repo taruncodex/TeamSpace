@@ -1,6 +1,22 @@
-.users-page {
+/* .users-page {
   max-width: 800px;
   margin: 0 auto;
+  padding: 20px;
+  background-color: teal;
+} */
+body {
+  width: fit-content; /* Adjust the width of the body according to the content */
+  margin: 0 auto; /* Centers the body content horizontally */
+  padding: 20px; /* Optional: Adds some padding around the content */
+  background-color: teal; /* Optional: Light background color for the body */
+  min-width: 300px; /* Ensures the body doesn't shrink too small */
+  box-sizing: border-box; /* Makes sure padding doesn't affect the width calculation */
+}
+
+.users-page {
+  width: 1000px;
+  background-color: teal;
+  border-radius: 8px;
   padding: 20px;
 }
 
@@ -77,7 +93,7 @@ h2 {
   border: 2px dotted #3f3c3c;
   background-color: #e8f0fe;
   cursor: pointer;
-  width: 220px;
+  width: 240px;
   height: auto;
   box-sizing: border-box;
 }
@@ -87,6 +103,7 @@ h2 {
   margin-right: 10px;
   font-weight: bold;
   color: #007bff;
+  border: 2px solid;
 }
 
 .modal {
