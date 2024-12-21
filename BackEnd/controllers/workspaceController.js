@@ -1,20 +1,32 @@
 import { Workspace } from "../models/workspaceModel.js";
 
 export const createWorkspace = async (req, res) => {
-  const { workSpaceName, members, createdBy } = req.body; // member should be the array of object [{},{}] // that include the object is of each user
-  if (!workSpaceName || !createdBy) {
-    return res
-      .status(400)
-      .json({ error: "Name and createdBy fields are required." });
-  }
-  // TEST
   try {
-    // Creating new workspace
+    console.log("req came");
+    const { workSpaceName, members, createdBy } = req.body; // member should be the array of object [{},{}] // that include the object is of each user
+    if (!workSpaceName || !createdBy) {
+      return res
+        .status(400)
+        .json({ error: "Name and createdBy fields are required." });
+    }
+
+    console.log(workSpaceName, members, createdBy);
+
+    console.log("Into the try and catch.");
+
+    let membersList = [{ userId: createdBy }];
+
+    // logic to add members will be added soon
+    // We take list of emails in the member list in the array of string format [ "" , "", "" ] ,
+    // then we fetch matching email's id from DB and push into the membersList.
+
     const newWorkspace = new Workspace({
       workSpaceName,
-      members: members || [{ userId: createdBy }], // If no members are provided, default to an empty array
+      members: membersList, // If no members are provided, default to an empty array
       createdBy,
     });
+
+    console.log("Workspace completed : ", newWorkspace);
 
     const savedWorkspace = await newWorkspace.save();
 

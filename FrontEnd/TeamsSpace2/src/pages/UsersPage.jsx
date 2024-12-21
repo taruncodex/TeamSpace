@@ -47,7 +47,7 @@ export default function UsersPage() {
       const response = await axios.post(
         `https://teamspace.onrender.com/createWorkspace`,
         {
-          WorkspaceName: newWorkspaceName,
+          workSpaceName: newWorkspaceName,
           members: newMembers.split(",").map((member) => member.trim()),
           createdBy: userId, //Replace with authenticated user info
         },
