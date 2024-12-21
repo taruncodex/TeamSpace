@@ -75,7 +75,8 @@ export default function UsersPage() {
       <h2>WorkSpaces</h2>
       <div className="boxes">
         <div className="box dotted-box" onClick={() => setIsModalOpen(true)}>
-          <span className="plus-sign">+</span> Add Workspace
+          <span className="plus-sign">+</span> 
+          <p className="add-workspace-text">Add Workspace</p>
         </div>
 
         {/* <div className="box">Workspace 1</div>
