@@ -7,7 +7,7 @@ export const createWorkspace = async (req, res) => {
       .status(400)
       .json({ error: "Name and createdBy fields are required." });
   }
-
+  // TEST
   try {
     // Creating new workspace
     const newWorkspace = new Workspace({
