@@ -22,8 +22,10 @@ export default function UsersPage() {
       const response = await axios.get(
         `https://teamspace.onrender.com/workspaces/${userId}` // not :-  workspaces/:userId
       );
-      console.log("Get req. completed. ");
-      console.log("response: ", response);
+
+      // Using console For Debug Purpose
+      console.log("Get req. completed.");
+      console.log("response : ", response);
       console.log("response.data :  ", response.data);
 
       setWorkspaces(response.data);
