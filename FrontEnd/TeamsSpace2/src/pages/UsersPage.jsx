@@ -115,7 +115,6 @@ export default function UsersPage() {
                 placeholder="Members"
                 value={newMembers}
                 onChange={(e) => setNewMembers(e.target.value)}
-                required
               />
               <div className="modal-actions">
                 <button type="submit">Add</button>
