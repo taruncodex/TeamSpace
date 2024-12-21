@@ -9,50 +9,30 @@ h2 {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   margin-bottom: 20px;
 }
-
-/* .boxes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-} */
-
-/* .box {
-  padding: 20px;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  height: 100px;
-} */
-
 .box {
-  padding: 15px; /* Adjusted for more space */
+  padding: 15px;
   border: 2px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9;
-  font-size: 15px; /* Reduced font size for better fit */
+  font-size: 15px;
   display: flex;
-  flex-direction: column; /* Stack the elements vertically */
-  align-items: flex-start; /* Align text to the left */
-  justify-content: space-between; /* Distribute content evenly */
-  width: 240px; /* Slightly wider for more content space */
-  height: auto; /* Allow box height to adjust */
-  box-sizing: border-box; /* Include padding and border in the width */
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 240px;
+  height: auto;
+  box-sizing: border-box;
 }
 
 .box h3 {
-  font-size: 16px; /* Adjusted title size */
+  font-size: 16px;
   font-weight: bold;
   margin: 0 0 10px;
   color: #333;
 }
 
 .box p {
-  font-size: 13px; /* Smaller font for better fit */
+  font-size: 13px;
   color: #555;
   line-height: 1.4;
   margin: 5px 0;
@@ -66,60 +46,47 @@ h2 {
   margin: 2px 0;
   border-radius: 12px;
   font-size: 12px;
-  white-space: nowrap; /* Prevent wrapping of individual member emails */
-  overflow: hidden; /* Hide overflowing content */
-  text-overflow: ellipsis; /* Add ellipsis for overflow */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .boxes {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px; /* Adjusted spacing between boxes */
-  justify-content: center; /* Center-align the grid */
+  gap: 30px;
+  justify-content: center;
 }
 
 @media screen and (max-width: 768px) {
   .box {
-    width: 100%; /* Make boxes full-width for smaller screens */
+    width: 100%;
     flex-direction: column;
     align-items: flex-start;
   }
 
   .boxes {
-    gap: 10px; /* Reduced gap for smaller screens */
+    gap: 10px;
   }
 }
-
-/* .dotted-box {
-  border: 2px dotted #3f3c3c;
-  background-color: #e8f0fe;
-  cursor: pointer;
-}
-
-.plus-sign {
-  font-size: 100vh;
-  margin-right: 10px;
-  font-weight: bold;
-} */
 .dotted-box {
   display: flex;
-  align-items: center; /* Aligns items vertically in the center */
+  align-items: center;
   justify-content: center;
   padding: 15px;
   border: 2px dotted #3f3c3c;
   background-color: #e8f0fe;
   cursor: pointer;
-  width: 220px; /* Adjusted width */
-  height: auto; /* Let the height adjust */
+  width: 220px;
+  height: auto;
   box-sizing: border-box;
 }
 
 .plus-sign {
-  font-size: 24px; /* Reduced to a balanced size */
-
-  margin-right: 10px; /* Adds spacing between the icon and text */
+  font-size: 24px;
+  margin-right: 10px;
   font-weight: bold;
-  color: #007bff; /* Optional: Add color for better visual distinction */
+  color: #007bff;
 }
 
 .modal {
