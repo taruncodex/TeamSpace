@@ -1,0 +1,12 @@
+.chatbox{
+    
+    width: 76.4vw;
+    margin-top: 5px;
+    height: 85.5vh;
+    margin-bottom: 5px;
+    background-color: #0c67a0;
+    background-color: black;
+    box-shadow: 1px 1px 4px rgba(255, 255, 255, 0.8); 
+    border-radius: 20px;
+
+}

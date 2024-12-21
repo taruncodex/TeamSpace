@@ -1,6 +1,6 @@
 {
   "name": "teamsspace2",
-  "proxy":"http://localhost:3000",
+  "proxy": "http://localhost:3000",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,10 +11,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "axios": "^1.7.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^7.0.2"
+    "react-input-emoji": "^5.9.0",
+    "react-router-dom": "^7.0.2",
+    "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

@@ -1,4 +1,8 @@
-.textarea {
+
+.workspacePage{
+  background-color: black;
+}
+/* .textarea {
   width: 80%;
   max-width: 800px;
   height: 100px;
@@ -31,8 +35,8 @@
 
 .textarea input::placeholder {
   color: #888;
-}
+} */
 
-.textarea input:focus {
+/* .textarea input:focus {
   box-shadow: 0 0 1px;
-}
+} */
