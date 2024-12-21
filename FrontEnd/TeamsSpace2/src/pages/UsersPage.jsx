@@ -86,7 +86,7 @@ export default function UsersPage() {
             <h3>{workspace.workSpaceName}</h3>
             <p>
               <strong>Members:</strong>{" "}
-              {workspace.members.length > 0
+              {workspace.members && workspace.members.length > 0
                 ? workspace.members.map((member, index) => (
                     <span key={index}>{member.email}</span>
                   ))
