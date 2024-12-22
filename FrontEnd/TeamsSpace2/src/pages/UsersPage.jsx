@@ -8,29 +8,54 @@ export default function UsersPage() {
   const [newWorkspaceName, setNewWorkspaceName] = useState("");
   const [newMembers, setNewMembers] = useState("");
   const [error, setError] = useState("");
+  const [userId, setUserId] = useState("");
 
-  const userId = localStorage.getItem("userId"); // Retrieve the logged-in user ID
+  // const userId = localStorage.getItem("userId");
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("Authentication token not found. Please log in.");
+      return;
+    }
+
+    const savedUserId = localStorage.getItem("userId");
+    if (!savedUserId) {
+      setError("User ID not found. Please log in again.");
+      return;
+    }
+
+    setUserId(savedUserId);
+  }, []);
 
   useEffect(() => {
-    fetchWorkspaces();
-  }, []);
+    // Fetch workspaces if userId is available
+    if (userId) fetchWorkspaces();
+  }, [userId]);
 
   async function fetchWorkspaces() {
     try {
-      console.log("Try to make get req.");
-      console.log(userId);
+      const token = localStorage.getItem("token");
+      // console.log(userId);
       const response = await axios.get(
-        `https://teamspace.onrender.com/workspaces/${userId}` // not :-  workspaces/:userId
+        `https://teamspace.onrender.com/workspaces/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include token in the Authorization header
+          },
+        }
       );
 
       // Using console For Debug Purpose
       console.log("Get req. completed.");
       console.log("response : ", response);
-      console.log("response.data :  ", response.data);
 
       setWorkspaces(response.data);
     } catch (error) {
       setError("Failed to fetch workspaces");
+      console.error(
+        "Error fetching workspaces:",
+        error.response?.data || error
+      );
     }
   }
 
@@ -44,16 +69,18 @@ export default function UsersPage() {
     }
 
     try {
+      const token = localStorage.getItem("token");
       const response = await axios.post(
         `https://teamspace.onrender.com/createWorkspace`,
         {
           WorkspaceName: newWorkspaceName,
           members: newMembers.split(",").map((member) => member.trim()),
-          createdBy: userId, //Replace with authenticated user info
+          createdBy: userId, // Using decoded userId
         },
         {
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         }
       );
