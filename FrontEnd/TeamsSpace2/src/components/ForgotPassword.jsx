@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "../styles/forgotPassword.css";
 import { useSearchParams, useNavigate } from "react-router-dom"; // useSearchParams for token from URL
 
 const ForgotResetPassword = () => {
