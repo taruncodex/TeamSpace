@@ -70,10 +70,11 @@ export default function UsersPage() {
 
     try {
       const token = localStorage.getItem("token");
+      console.log("token: ", token);
       const response = await axios.post(
         `https://teamspace.onrender.com/createWorkspace`,
         {
-          WorkspaceName: newWorkspaceName,
+          workSpaceName: newWorkspaceName,
           members: newMembers.split(",").map((member) => member.trim()),
           createdBy: userId, // Using decoded userId
         },
