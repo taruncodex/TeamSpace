@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import "./Login_Register.css";
 import axios from "axios";
 
@@ -67,7 +67,7 @@ export default function LoginPage() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <Link to={"/Forgotpassword"}>Forgot Password?</Link>
+      <a href="#">Forgot Password?</a>
       <button>Login</button>
     </form>
   );
