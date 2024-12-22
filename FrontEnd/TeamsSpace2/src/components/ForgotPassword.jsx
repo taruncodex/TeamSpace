@@ -17,7 +17,10 @@ const ForgotResetPassword = () => {
   const handleForgotPasswordSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/forgot-password", { email });
+      const response = await axios.post(
+        `https://teamspace.onrender.com/api/forgot-password `,
+        { email }
+      );
       setMessage(response.data.message); // Success or error message
     } catch (error) {
       setMessage("An error occurred. Please try again.");
@@ -32,10 +35,13 @@ const ForgotResetPassword = () => {
       return;
     }
     try {
-      const response = await axios.post("/api/reset-password", {
-        token,
-        newPassword,
-      });
+      const response = await axios.post(
+        `https://teamspace.onrender.com//api/reset-password`,
+        {
+          token,
+          newPassword,
+        }
+      );
       setMessage(response.data.message); // Success message
       setTimeout(() => navigate("/login"), 3000); // Redirect to login after 3 seconds
     } catch (error) {
