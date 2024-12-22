@@ -10,7 +10,6 @@ export default function UsersPage() {
   const [error, setError] = useState("");
   const [userId, setUserId] = useState("");
 
-  // const userId = localStorage.getItem("userId");
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -35,7 +34,6 @@ export default function UsersPage() {
   async function fetchWorkspaces() {
     try {
       const token = localStorage.getItem("token");
-      // console.log(userId);
       const response = await axios.get(
         `https://teamspace.onrender.com/workspaces/${userId}`,
         {
@@ -45,7 +43,6 @@ export default function UsersPage() {
         }
       );
 
-      // Using console For Debug Purpose
       console.log("Get req. completed.");
       console.log("response : ", response);
 
@@ -70,13 +67,12 @@ export default function UsersPage() {
 
     try {
       const token = localStorage.getItem("token");
-      console.log("token: ", token);
       const response = await axios.post(
         `https://teamspace.onrender.com/createWorkspace`,
         {
           workSpaceName: newWorkspaceName,
           members: newMembers.split(",").map((member) => member.trim()),
-          createdBy: userId, // Using decoded userId
+          createdBy: userId,
         },
         {
           headers: {
@@ -88,14 +84,16 @@ export default function UsersPage() {
 
       console.log("Server Response:", response.data);
 
-      // Use the functional form to ensure you append to the latest state
-      setWorkspaces((prevWorkspaces) => [...prevWorkspaces, response.data]);
+      // Refetch workspaces to ensure consistency
+      fetchWorkspaces();
+
+      // Clear form and close modal
       setNewWorkspaceName("");
       setNewMembers("");
       setIsModalOpen(false);
     } catch (error) {
-      // setError(error.response.data?.message || "Failed to create Workspace.");
-      console.log(error.response.data);
+      console.error("Error adding workspace:", error.response?.data || error);
+      setError("Failed to create workspace. Please try again.");
     }
   }
 
@@ -108,8 +106,6 @@ export default function UsersPage() {
           <p className="add-workspace-text">Add Workspace</p>
         </div>
 
-        {/* <div className="box">Workspace 1</div>
-        <div className="box">Workspace 2</div> */}
         {workspaces.map((workspace, index) => (
           <div key={workspace._id || index} className="box">
             <h3>{workspace.workSpaceName}</h3>
