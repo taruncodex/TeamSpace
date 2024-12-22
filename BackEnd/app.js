@@ -10,7 +10,7 @@ import cors from "cors";
 const app = express();
 
 // Allowed origins for CORS
-app.use(cors({ origin: "https://verdant-ganache-92b6a3.netlify.app/" }));
+app.use(cors({ origin: "https://verdant-ganache-92b6a3.netlify.app" }));
 
 
 app.use(express.json());
