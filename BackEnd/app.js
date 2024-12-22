@@ -10,26 +10,8 @@ import cors from "cors";
 const app = express();
 
 // Allowed origins for CORS
-const allowedOrigins = [
-  "https://verdant-ganache-92b6a3.netlify.app",
-  "https://teamspace.onrender.com"
-];
+app.use(cors({ origin: "https://verdant-ganache-92b6a3.netlify.app/" }));
 
-// CORS middleware to handle multiple origins
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (e.g., mobile apps or curl)
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true); // Allow the request
-      } else {
-        callback(new Error("Not allowed by CORS")); // Deny the request
-      }
-    },
-  })
-);
 
 app.use(express.json());
 
