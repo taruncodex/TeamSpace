@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "./Login_Register.css";
 import axios from "axios";
 
@@ -19,9 +19,14 @@ export default function LoginPage() {
         password,
       });
       console.log("Response:", res);
-      if (res.data.msg) {
+      if (res.data.token) {
         // Assuming that the token is sent in the response and `msg` indicates success
         localStorage.setItem("token", res.data.token); // Store token in localStorage (if available)
+
+        localStorage.setItem("userId", res.data.Data[0]._id); // Storing user ID
+        console.log(res.data.Data[0]._id);
+        console.log(res.data.token);
+
         setRedirect(true); // Set redirect flag to true after successful login
       } else {
         setError(res.data.msg || "Login failed");
@@ -62,7 +67,7 @@ export default function LoginPage() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <a href="#">Forgot Password?</a>
+      <Link to={"/Forgotpassword"}>Forgot Password?</Link>
       <button>Login</button>
     </form>
   );

@@ -24,6 +24,7 @@ const userSchema = new Schema({
   phone: { type: String, required: true },
 
   refreshToken: { type: String },
+  resetToken: { type: String },
 });
 
 export const User = new model("User", userSchema);

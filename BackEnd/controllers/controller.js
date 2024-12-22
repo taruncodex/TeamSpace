@@ -43,7 +43,7 @@ export const createUser = async (req, res) => {
         .json({ error: " This phone number already exists." });
     }
 
-    console.log("Hasinh the password");
+    console.log("Hasing the password");
 
     // Hasing the Password
     const hashedPassword = await hashPassword(password);
@@ -88,24 +88,14 @@ export const logIn = async (req, res) => {
     // Checking the Password of the User
     const isValidPass = await comparePassword(password, user[0].password);
 
+    console.log("Jwt secret: ", process.env.JWT_SECRET);
     if (isValidPass) {
       // Creating the Access Token.
       const token = jwt.sign(
-        // Payload
-        {
-          id: user[0]._id,
-          name: user[0].userName,
-          email: user[0].email,
-        },
-        //Server Side Password
+        { id: user[0]._id, name: user[0].userName, email: user[0].email },
         process.env.JWT_SECRET,
-
-        // Expiration Time
-        {
-          expiresIn: "100min",
-        }
+        { expiresIn: "100min" }
       );
-
       // Creating refresh token
       const refreshToken = jwt.sign(
         { id: user[0]._id, for: "Refresh" },

@@ -38,15 +38,14 @@ export const createWorkspace = async (req, res) => {
 
     const { workSpaceName, members } = req.body; // member should be the array of object [{},{}]
     const createdBy = req.locals.id;
+    console.log("createdBy", createdBy);
+    console.log(workSpaceName, members, createdBy);
 
     // If workSpaceName is not mentioned
     if (!workSpaceName) {
-      return res
-        .status(400)
-        .json({ error: "Name and createdBy fields are required." });
+      return res.status(400).json({ error: "WorkSpace Name is requried." });
     }
 
-    console.log(workSpaceName, members, createdBy);
     console.log("Into the try and catch.");
 
     let membersList = [{ userId: createdBy }]; // Get the user who create the workSpace.
@@ -89,6 +88,7 @@ export const createWorkspace = async (req, res) => {
     // Save the updated user document
     await user.save();
 
+    console.log("sENDING THE respond to the Frontend");
     return res.status(201).json({
       message: "Workspace created successfully",
       workspace: savedWorkspace,
