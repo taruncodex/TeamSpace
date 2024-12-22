@@ -17,12 +17,11 @@ router.get("/", homePage);
 router.post("/sign-up", createUser);
 router.post("/login", logIn);
 router.get("/token", refreshToken);
-router.post("/forgot-password", forgotPassword);
-router.post("/reset-password", resetPassword);
+router.post("/api/forgot-password", forgotPassword);
+router.post("/api/reset-password", resetPassword);
 
 // Route to create a workspace
 router.post("/createWorkspace", verifyToken, createWorkspace);
-
 // Route to get workspaces for a specific user
 router.get("/workspaces/:userId", verifyToken, getWorkspacesByUser);
 
