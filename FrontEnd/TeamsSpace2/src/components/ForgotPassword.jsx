@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/forgotPassword.css";
-import { useSearchParams, useNavigate } from "react-router-dom"; // useSearchParams for token from URL
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 const ForgotResetPassword = () => {
   const [email, setEmail] = useState(""); // Email for Forgot Password
@@ -76,6 +76,7 @@ const ForgotResetPassword = () => {
             <button type="submit">Send Reset Link</button>
           </form>
           <div className="back-to-login">
+            {/* Back button to Reset Password */}
             <button onClick={() => setIsForgotPassword(false)}>
               Back to Reset
             </button>
@@ -110,6 +111,7 @@ const ForgotResetPassword = () => {
             </form>
           )}
           <div className="back-to-forgot-password">
+            {/* Back button to Forgot Password */}
             <button onClick={() => setIsForgotPassword(true)}>
               Back to Forgot Password
             </button>
