@@ -88,7 +88,8 @@ export default function UsersPage() {
 
       console.log("Server Response:", response.data);
 
-      setWorkspaces([...workspaces, response.data]);
+      // Use the functional form to ensure you append to the latest state
+      setWorkspaces((prevWorkspaces) => [...prevWorkspaces, response.data]);
       setNewWorkspaceName("");
       setNewMembers("");
       setIsModalOpen(false);
@@ -109,14 +110,16 @@ export default function UsersPage() {
 
         {/* <div className="box">Workspace 1</div>
         <div className="box">Workspace 2</div> */}
-        {workspaces.map((workspace) => (
-          <div key={workspace._id} className="box">
+        {workspaces.map((workspace, index) => (
+          <div key={workspace._id || index} className="box">
             <h3>{workspace.workSpaceName}</h3>
             <p>
               <strong>Members:</strong>{" "}
               {workspace.members && workspace.members.length > 0
-                ? workspace.members.map((member, index) => (
-                    <span key={index}>{member.email}</span>
+                ? workspace.members.map((member, memberIndex) => (
+                    <span key={member.userId || memberIndex}>
+                      {member.email}
+                    </span>
                   ))
                 : "No members"}
             </p>
