@@ -10,10 +10,14 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/forgot-password", { email });
+      const response = await axios.post(
+        "https://teamspace.onrender.com/api/forgot-password",
+        { email }
+      );
       setMessage(response.data.message);
     } catch (error) {
       setMessage("An error occurred. Please try again.");
+      console.error("Login error:", error.response.data);
     }
   };
 
