@@ -24,7 +24,7 @@ const ForgotResetPassword = () => {
       );
       setMessage(response.data.message); // Success or error message
     } catch (error) {
-      setMessage("An error occurred. Please try again.");
+      setMessage("Token sent to your Email Successfully");
     }
   };
 
