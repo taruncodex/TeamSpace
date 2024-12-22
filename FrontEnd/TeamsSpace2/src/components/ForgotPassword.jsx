@@ -37,7 +37,7 @@ const ForgotResetPassword = () => {
     }
     try {
       const response = await axios.post(
-        `https://teamspace.onrender.com//api/reset-password`,
+        `https://teamspace.onrender.com/api/reset-password`,
         {
           token,
           newPassword,
