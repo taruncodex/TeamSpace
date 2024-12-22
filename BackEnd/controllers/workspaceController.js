@@ -2,7 +2,7 @@ import { Workspace } from "../models/workspaceModel.js";
 
 export const createWorkspace = async (req, res) => {
   console.log("Creating Workspace");
-  const { workSpaceName, members } = req.body; // member should be the array of object [{},{}] // that include the object is of each user
+  const { workSpaceName, members, createdBy } = req.body; // member should be the array of object [{},{}] // that include the object is of each user
   if (!workSpaceName || !createdBy) {
     return res
       .status(400)
@@ -10,7 +10,6 @@ export const createWorkspace = async (req, res) => {
   }
 
   try {
-    console.log();
     // Creating new workspace
     const newWorkspace = new Workspace({
       workSpaceName,

@@ -37,7 +37,7 @@ export default function UsersPage() {
       const token = localStorage.getItem("token");
       // console.log(userId);
       const response = await axios.get(
-        `https://teamspace.onrender.com/workspaces/${userId}`,
+        ` http://localhost:3000/workspaces/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`, // Include token in the Authorization header
