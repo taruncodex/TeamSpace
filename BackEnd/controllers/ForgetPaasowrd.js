@@ -66,6 +66,7 @@ const sendResetEmail = async (email, token) => {
 
 export const forgotPassword = async (req, res) => {
   try {
+    console.log("entered");
     const { email } = req.body;
     console.log(email);
 
