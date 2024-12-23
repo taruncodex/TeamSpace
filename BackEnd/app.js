@@ -9,7 +9,9 @@ import cors from "cors";
 
 const app = express();
 
-app.use(cors({ origin: "https://verdant-ganache-92b6a3.netlify.app/" }));
+// Allowed origins for CORS
+app.use(cors({ origin: "https://bespoke-gecko-5a4936.netlify.app" }));
+
 
 app.use(express.json());
 

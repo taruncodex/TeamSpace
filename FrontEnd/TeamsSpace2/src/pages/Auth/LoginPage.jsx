@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "./Login_Register.css";
 import axios from "axios";
 
@@ -33,7 +33,11 @@ export default function LoginPage() {
       }
     } catch (err) {
       console.error("Login error:", err); // To show the general error
+<<<<<<< HEAD
       //console.error("Login error:", err.response?.data); // to catch the API error
+=======
+      console.error("Login error:", err.response?.data); // to catch the API error
+>>>>>>> ef1465f5d89603464089defe82c04a96ad9bf0a8
 
       if (err.response) {
         // The request was made and the server responded
@@ -67,7 +71,7 @@ export default function LoginPage() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <a href="#">Forgot Password?</a>
+      <Link to={"/ForgotResetPassword"}>Forgot Password?</Link>
       <button>Login</button>
     </form>
   );
