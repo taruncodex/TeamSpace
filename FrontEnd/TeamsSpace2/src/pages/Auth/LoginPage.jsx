@@ -33,7 +33,7 @@ export default function LoginPage() {
       }
     } catch (err) {
       console.error("Login error:", err); // To show the general error
-      console.error("Login error:", err.response.data); // to catch the API error
+      //console.error("Login error:", err.response?.data); // to catch the API error
 
       if (err.response) {
         // The request was made and the server responded
